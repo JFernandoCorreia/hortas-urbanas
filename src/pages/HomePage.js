@@ -49,10 +49,10 @@ const HomePage = () => {
             Inscrição de Novas Hortas
           </Link>
           <Link to="/dicas" className="bg-recifeBlue text-recifeWhite px-4 sm:px-6 py-3 rounded-lg shadow-xl hover:bg-recifeGold hover:text-recifeBlue transition duration-300 block">
-            Dicas Sobre Cultivo
+            Dicas Sobre Cultivo de Hortas
           </Link>
           <Link to="/sobre" className="bg-recifeBlue text-recifeWhite px-4 sm:px-6 py-3 rounded-lg shadow-xl hover:bg-recifeGold hover:text-recifeBlue transition duration-300 block">
-            Sobre
+            Sobre o Projeto das Hortas
           </Link>
         </div>
       </main>
