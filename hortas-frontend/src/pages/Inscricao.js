@@ -68,9 +68,9 @@ const Inscricao = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-4" style={{ backgroundImage: "url('/images/flores.png')" }}>
-      <form onSubmit={formik.handleSubmit} className="w-full max-w-md bg-transparent p-8 rounded-lg shadow-lg space-y-4">
-        <label htmlFor="nome" className="block mb-2 text-recifeWhite">Nome Completo</label>
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-4" style={{ backgroundImage: "url('/images/backimage.png')" }}>
+      <form onSubmit={formik.handleSubmit} className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg space-y-4 z-10">
+        <label htmlFor="nome" className="block mb-2 text-recifeBlue text-xl font-semibold">Nome Completo</label>
         <input
           type="text"
           name="nome"
@@ -81,7 +81,7 @@ const Inscricao = () => {
           required
         />
 
-        <label htmlFor="email" className="block mb-2 text-recifeWhite">E-mail</label>
+        <label htmlFor="email" className="block mb-2 text-recifeBlue text-xl font-semibold">E-mail</label>
         <input
           type="email"
           name="email"
@@ -92,7 +92,7 @@ const Inscricao = () => {
           required
         />
 
-        <label htmlFor="cpf" className="block mb-2 text-recifeWhite">CPF</label>
+        <label htmlFor="cpf" className="block mb-2 text-recifeBlue text-xl font-semibold">CPF</label>
         <input
           type="text"
           name="cpf"
@@ -103,7 +103,7 @@ const Inscricao = () => {
           required
         />
 
-        <label htmlFor="cep" className="block mb-2 text-recifeWhite">CEP</label>
+        <label htmlFor="cep" className="block mb-2 text-recifeBlue text-xl font-semibold">CEP</label>
         <input
           type="text"
           name="cep"
@@ -114,7 +114,7 @@ const Inscricao = () => {
           required
         />
 
-        <label htmlFor="endereco" className="block mb-2 text-recifeWhite">Logradouro</label>
+        <label htmlFor="endereco" className="block mb-2 text-recifeBlue text-xl font-semibold">Logradouro</label>
         <input
           type="text"
           name="endereco"
@@ -125,7 +125,7 @@ const Inscricao = () => {
           required
         />
 
-        <label htmlFor="bairro" className="block mb-2 text-recifeWhite">Bairro</label>
+        <label htmlFor="bairro" className="block mb-2 text-recifeBlue text-xl font-semibold">Bairro</label>
         <input
           type="text"
           name="bairro"
@@ -136,18 +136,7 @@ const Inscricao = () => {
           required
         />
 
-        <label htmlFor="diasFuncionamento" className="block mb-2 text-recifeWhite">Dias de Funcionamento</label>
-        <input
-          type="text"
-          name="diasFuncionamento"
-          value={formik.values.diasFuncionamento}
-          onChange={formik.handleChange}
-          placeholder="Dias de Funcionamento"
-          className="block w-full p-2 border rounded text-black"
-          required
-        />
-
-        <label htmlFor="telefone" className="block mb-2 text-recifeWhite">Telefone</label>
+        <label htmlFor="telefone" className="block mb-2 text-recifeBlue text-xl font-semibold">Telefone</label>
         <input
           type="text"
           name="telefone"
@@ -158,7 +147,34 @@ const Inscricao = () => {
           required
         />
 
-        <label htmlFor="descricao" className="block mb-2 text-recifeWhite">Descrição</label>
+        <label className="block mb-2 text-recifeBlue text-xl font-semibold">
+          Dias de Funcionamento
+        </label>
+        <div className="grid grid-cols-2 gap-2">
+          {["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado", "Domingo"].map((dia) => (
+            <label key={dia} className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                name="diasFuncionamento"
+                value={dia}
+                checked={formik.values.diasFuncionamento.includes(dia)}
+                onChange={(e) => {
+                  const { value, checked } = e.target;
+                  formik.setFieldValue(
+                    "diasFuncionamento",
+                    checked
+                      ? [...formik.values.diasFuncionamento, value]
+                      : formik.values.diasFuncionamento.filter((d) => d !== value)
+                  );
+                }}
+                className="form-checkbox h-5 w-5 text-recifeBlue"
+              />
+              <span className="text-recifeBlue font-semibold">{dia}</span>
+            </label>
+          ))}
+        </div>
+
+        <label htmlFor="descricao" className="block mb-2 text-recifeBlue text-xl font-semibold">Descrição</label>
         <textarea
           name="descricao"
           value={formik.values.descricao}

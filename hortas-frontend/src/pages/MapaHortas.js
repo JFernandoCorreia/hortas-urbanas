@@ -1,17 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import axios from 'axios';
-
-// Configuração do ícone personalizado
-const userLocationIcon = L.icon({
-  iconUrl: '/images/local.jpeg', // Caminho da imagem estática
-  iconSize: [50, 50], // Tamanho do ícone
-  iconAnchor: [25, 25], // Ponto de ancoragem (centro)
-  popupAnchor: [0, -25], // Posição do popup em relação ao ícone
-});
 
 // Botão de Centralização
 function CentralizarBotao({ center }) {
@@ -29,9 +20,9 @@ function CentralizarBotao({ center }) {
     // biome-ignore lint/a11y/useButtonType: <explanation>
     <button
       onClick={handleClick}
-      className="fixed bottom-10 right-10 bg-recifeBlue text-white px-4 py-2 rounded shadow hover:bg-recifeGold z-50"
+      className="fixed bottom-4 right-4 md:bottom-10 md:right-10 bg-recifeBlue text-white px-3 py-2 text-sm md:text-base rounded shadow hover:bg-recifeGold z-50"
     >
-      Centralizar no Usuário
+      📍 Centralizar
     </button>
   );
 }
@@ -93,45 +84,46 @@ function MapaHortas() {
       />
 
       <div className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2 relative">
-        <h2 className="text-2xl font-bold mb-4 text-center">Mapa das Hortas</h2>
-        <MapContainer
-          center={userLocation || [37.7749, -122.4194]} // Localização do usuário ou posição padrão
-          zoom={userLocation ? 13 : 10}
-          style={{ height: '80vh', width: '100%' }}
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-          {/* Exibe a localização do usuário com a imagem personalizada */}
-          {userLocation && (
-            <Marker position={userLocation} icon={userLocationIcon}>
-              <Popup>Você está aqui!</Popup>
-            </Marker>
-          )}
-
-          {/* Exibe o botão de centralizar no usuário */}
-          {userLocation && <CentralizarBotao center={userLocation} />}
-
-          {/* Exibe a localização do usuário se disponível */}
-          {userLocation && (
+      
+        {/* Caixa branca contendo o mapa */}
+        <div className="bg-white p-4 rounded-md shadow-md relative z-10">
+          <h2 className="text-recifeBlue text-3xl font-bold mb-4 text-center">Mapa das Hortas</h2>
+        
+           <MapContainer
+            center={userLocation || [37.7749, -122.4194]}
+            zoom={userLocation ? 13 : 10}
+            style={{
+                height: '60vh', // Mantém altura ajustada dentro da caixa
+                width: '100%',
+                 minHeight: '300px',
+                 marginTop: '10px', // Pequeno espaçamento do título
+                  }}
+             className="relative"
+            >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      
+             {userLocation && <CentralizarBotao center={userLocation} />}
+      
+             {userLocation && (
             <Marker position={userLocation}>
               <Popup>Você está aqui!</Popup>
             </Marker>
-          )}
+                )}
 
-          {/* Exibe as hortas no mapa com filtro */}
-          {hortas
-            .filter((horta) => horta.tipo.toLowerCase().includes(filtro.toLowerCase()))
-            .map((horta, index) => (
-              <Marker key={horta.id || index} position={[horta.latitude, horta.longitude]}>
-                <Popup>
-                  <strong>{horta.nome}</strong>
-                  <br />
-                  {horta.tipo}
-                </Popup>
-              </Marker>
-            ))
-          }
-        </MapContainer>
+              {hortas
+                .filter((hortas) => hortas.tipo.toLowerCase().includes(filtro.toLowerCase()))
+                .map((hortas, index) => (
+                <Marker key={hortas.id || index} position={[hortas.latitude, hortas.longitude]}>
+                 <Popup>
+                   <strong>{hortas.nome}</strong>
+                   <br />
+                   {hortas.tipo}
+                  </Popup>
+                </Marker>
+              ))
+            }
+          </MapContainer>
+        </div>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ code {
 }
 
 body {
-  background-image: url('/public/images/flores.png');
+  background-image: url('/public/images/backimage.png');
   background-size: cover;
   background-attachment: fixed;
   background-position: center;

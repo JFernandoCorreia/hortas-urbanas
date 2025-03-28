@@ -67,14 +67,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-4" style={{ backgroundImage: "url('/images/flores.png')" }}>
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-transparent p-8 rounded-lg shadow-lg space-y-4"
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center px-4" style={{ backgroundImage: "url('/images/backimage.png')" }}>
+      <form onSubmit={handleSubmit}
+        className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg space-y-4 z-10"
       >
-        <h2 className="text-2xl font-bold text-white mb-4">Login</h2>
+        <h2 className="text-2xl font-bold text-recifeBlue mb-4">Login</h2>
         
-        <label htmlFor="email" className="block mb-2 text-recifeWhite">E-mail</label>
+        <label htmlFor="email" className="block mb-2 font-bold text-recifeBlue">E-mail</label>
         <input
           type="email"
           name="email"
@@ -83,7 +82,7 @@ const LoginPage = () => {
           placeholder="Email"
           className="p-3 w-full rounded-md border-2"
         />
-        <label htmlFor="password" className="block mb-2 text-recifeWhite">Senha</label>
+        <label htmlFor="password" className="block mb-2  font-bold text-recifeBlue">Senha</label>
         <input
           type="password"
           name="password"
@@ -92,7 +91,7 @@ const LoginPage = () => {
           placeholder="Senha"
           className="p-3 w-full rounded-md border-2"
         />
-        <label htmlFor="matricula" className="block mb-2 text-recifeWhite">Matricula</label>
+        <label htmlFor="matricula" className="block mb-2 font-bold text-recifeBlue">Matricula</label>
         <input
           type="text"
           name="matricula"

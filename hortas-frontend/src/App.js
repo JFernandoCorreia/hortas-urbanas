@@ -5,6 +5,8 @@ import MapaHortas from './pages/MapaHortas';
 import Inscricao from './pages/Inscricao';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
+import DicasPage from './pages/DicasPage';
+import SobrePage from './pages/SobrePage';
 import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/mapa-hortas" element={<MapaHortas />} />
           <Route path="/inscricao" element={<Inscricao />} />
+          <Route path="/dicas" element={<DicasPage />} />
+          <Route path="/sobre" element={<SobrePage />} />
         </Routes>
       </Router>
     </ThemeProvider>
