@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import MapaHortas from './pages/MapaHortas';
-import Inscricao from './pages/Inscricao';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import DicasPage from './pages/DicasPage';
-import SobrePage from './pages/SobrePage';
 import { ThemeProvider } from './context/ThemeContext';
+import AboutPage from './pages/AboutPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   return (
@@ -17,10 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/mapa-hortas" element={<MapaHortas />} />
-          <Route path="/inscricao" element={<Inscricao />} />
+          <Route path="/maps" element={<MapaHortas />} />
+          <Route path="/inscricao" element={<RegisterPage />} />
           <Route path="/dicas" element={<DicasPage />} />
-          <Route path="/sobre" element={<SobrePage />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

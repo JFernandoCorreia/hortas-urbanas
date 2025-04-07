@@ -1,63 +1,62 @@
-/* eslint-disable no-undef */
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:3001/api',
+  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api",
   headers: {
-    'Content-Type': 'application/json',
-  }
+    "Content-Type": "application/json",
+  },
 });
 
 /// Interceptor para adicionar o token JWT
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 // Interceptor para lidar com respostas de erro (e.g., 401 - Unauthorized)
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (error.response) {
-      // Verifique o status do código de erro
-      switch (error.response.status) {
-        case 401:
-          // Lidar com o erro de autenticação (token inválido ou expirado)
-          localStorage.removeItem('token'); // Remove o token expirado
-          console.error("Sessão expirada. Faça login novamente.");
-          // Navegue para a página de login ou redirecione o usuário
-          window.location.href = '/login'; // Redireciona para a página de login
+      const status = error.response.status;
+      const mensagemErro =
+        error.response.data.message || "Ocorreu um erro inesperado.";
+
+      switch (status) {
+        case 400:
+          toast.error(mensagemErro); // Exibir erro ao usuário
           break;
-        case 400: // Tratamento de erro 400 (BadRequest)
-          console.error("Erro 400 (BadRequest):", error.response.data);
-          // Exibe notificação ao usuário (e.g., usando uma biblioteca como toast)
-          toast.error('Erro ao fazer a requisição. Verifique os dados informados.');
+        case 401:
+          toast.error("Sessão expirada. Faça login novamente.");
+          localStorage.removeItem("token");
+          localStorage.removeItem("refreshToken");
+          window.location.href = "/login";
+          break;
+        case 403:
+          toast.error(
+            "Você não tem permissão para acessar esta funcionalidade."
+          );
+          break;
+        case 404:
+          toast.error("Recurso não encontrado. Verifique se a URL está correta.");
+          break;
+        case 500:
+          toast.error("Erro interno do servidor. Tente novamente mais tarde.");
           break;
         default:
-          console.error("Erro na requisição:", error.response.data);
-          toast.error('Erro ao fazer a requisição. Tente novamente mais tarde.');
-          break;
+          toast.error("Erro desconhecido. Entre em contato com o suporte.");
       }
 
-      return Promise.reject(error); // Rejeita a promessa, permitindo que o componente trate o erro
-    // biome-ignore lint/style/noUselessElse: <explanation>
-    } else if (error.request) {
-      // O pedido foi feito, mas não houve resposta
-      console.error("Sem resposta do servidor.");
-      toast.error('Sem resposta do servidor. Tente novamente mais tarde.');
+      return Promise.reject(error);
     } else {
-      // Houve um erro durante a configuração ou execução da solicitação
-      console.error("Erro na configuração da requisição:", error.message);
-      toast.error('Erro na configuração da requisição.');
+      toast.error("Sem resposta do servidor. Verifique sua conexão com a internet.");
     }
 
     return Promise.reject(error);

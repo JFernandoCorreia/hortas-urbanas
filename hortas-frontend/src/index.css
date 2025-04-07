@@ -42,13 +42,29 @@ body {
 }
 
 
+.card-container {
+  background-color: white !important;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.map-container {
+  width: 100%;
+  height: 400px !important;
+  min-height: 400px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Overlay para melhorar a visibilidade */
 .overlay {
-  background-color: rgba(0,0,0,3); /* Overlay transparente para melhorar a visibilidade do fundo */
-  position: absolute;
-  top: 0;
-  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
   width: 100%;
   height: 100%;
+  z-index: 0; /* Mantém no fundo */
 }
 
 main {

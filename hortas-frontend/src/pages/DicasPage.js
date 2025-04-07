@@ -25,7 +25,7 @@ const DicasPage = () => {
 
         <p className="text-lg leading-relaxed max-w-3xl mx-auto mb-8">
           Cultivar uma horta urbana pode ser simples e muito recompensador!  
-          Aqui estão algumas **dicas essenciais** para ajudá-lo a começar e manter sua horta saudável.  
+          Aqui estão algumas dicas essenciais para ajudá-lo a começar e manter sua horta saudável.  
         </p>
 
         <ul className="text-left max-w-3xl mx-auto space-y-6">
@@ -53,7 +53,7 @@ const DicasPage = () => {
 
       {/* Rodapé com botões de compartilhamento */}
       <footer className="mt-6 p-4 text-center shadow-lg">
-        <p className="text-lg font-bold mb-2">📢 Compartilhe essas dicas com seus amigos!</p>
+        <p className="text-recifeBlue text-lg font-bold mb-4">📢 Compartilhe essas dicas com seus amigos!</p>
         <div className="flex justify-center space-x-4">
           <FacebookShareButton url={window.location.origin}>
             <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">

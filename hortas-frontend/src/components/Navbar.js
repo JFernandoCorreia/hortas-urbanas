@@ -7,16 +7,16 @@ const Navbar = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const showNavbar = ['/login', '/mapa-hortas', '/inscricao', '/dicas', '/sobre'].includes(location.pathname);
+  const showNavbar = ['/login', '/maps', '/inscricao', '/dicas', '/about'].includes(location.pathname);
 
   // Lista de links da navbar
   const navLinks = [
     { to: '/', label: 'Início' },
     { to: '/login', label: 'Acesso' },
     { to: '/inscricao', label: 'Cadastro' },
-    { to: '/mapa-hortas', label: 'Mapas' },
+    { to: '/maps', label: 'Mapas' },
     { to: '/dicas', label: 'Dicas' },
-    { to: '/sobre', label: 'Sobre' },
+    { to: '/about', label: 'Sobre' },
   ]
 
   return (
